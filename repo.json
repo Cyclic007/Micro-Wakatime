@@ -1,3 +1,5 @@
 [{
-    "Name" : "MicroWakatime"
+    "Name" : "MicroWakatime",
+    "Description": "Wakatime coding time tracking plugin for Micro",
+    "Website":"https://github.com/Cyclic007/Micro-Wakatime"
 }]
