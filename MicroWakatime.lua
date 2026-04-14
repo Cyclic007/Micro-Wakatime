@@ -19,7 +19,7 @@ function init(bp)
     local config = shell.RunCommand("wakatime --config-read api_key")
     --micro.TermMessage(config)
     if  config ~= nil then else 
-		micro.TermMessage("you do not have a wakatime config file or an API key \n please add your API key or try and reinstall wakatime-cli")
+		micro.TermMessage("you do not have an API key \n please add your API key to your wakatime config at ~/.wakatime.cfg")
 	end
     
 
