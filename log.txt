@@ -1,6 +1,0 @@
-2026/04/14 09:19:15 Micro started
-2026/04/14 09:19:15 .git is not a plugin
-2026/04/14 09:19:15 sent saved heartbeat
-2026/04/14 09:20:05 tcell event error:  read /dev/tty: file already closed
-2026/04/14 09:20:05 sent saved heartbeat
-2026/04/14 09:20:11 tcell event error:  read /dev/tty: file already closed
