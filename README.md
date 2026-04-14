@@ -14,6 +14,6 @@ You need to have Micro installed along side the wakatime-cli
 
 to install use
 
-`git clone https://github.com/Cyclic007/Micro-Wakatime\`
+`git clone https://github.com/Cyclic007/Micro-Wakatime`
 
 inside of ~/.config/micro/plug/
