@@ -1,5 +1,5 @@
 VERSION = "1.0.0"
-
+-- This is a project made because the offical wakatime plugin for micro does not work
 
 local micro = import("micro")
 local config = import("micro/config")
@@ -15,16 +15,22 @@ local runtime = import("runtime")
 local lastFile = ""
 local lastHeartbeat = 0
 
-function getConfigFile()
-    return filepath.Join(os2.UserHomeDir(), ".wakatime.cfg")
+function init(bp)
+    local config = shell.RunCommand("wakatime --config-read api_key")
+    --micro.TermMessage(config)
+    if  config ~= nil then else 
+		micro.TermMessage("you do not have a wakatime config file or an API key \n please add your API key or try and reinstall wakatime-cli")
+	end
+    
+
 end
 
 function sendHeartbeat(file,isWrite)
     micro.Log("sent saved heartbeat")
     if isWrite == true then
-        micro.Log(shell.RunCommand("wakatime --entity " .. file .. " --write " ) )
+        micro.Log(shell.RunCommand("wakatime --entity " .. file .. " --write --plugin \"Micro Wakatime\"" ) )
     else
-        micro.Log(shell.RunCommand("wakatime --entity " .. file ) )
+        micro.Log(shell.RunCommand("wakatime --entity " .. file .. "--plugin \"Micro Wakatime\"" ) )
     end
     return false
 end
