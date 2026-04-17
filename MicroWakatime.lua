@@ -29,9 +29,9 @@ end
 function sendHeartbeat(file,isWrite,X,Y)
     micro.Log("sent saved heartbeat")
     if isWrite == true then
-        micro.Log(shell.RunCommand("wakatime --entity " .. file .. " --write --plugin \"Micro Wakatime\"--cursorpos" .. X .. " --lineno "..Y  ) )
+        micro.Log(shell.RunCommand("wakatime --verbose --entity " .. file .. " --write --plugin \"Micro Wakatime\"--cursorpos" .. X .. " --lineno "..Y  ) )
     else
-        micro.Log(shell.RunCommand("wakatime --entity " .. file .. "--plugin \"Micro Wakatime\" --cursorpos" .. X .. " --lineno "..Y ) )
+        micro.Log(shell.RunCommand("wakatime --verbose --entity " .. file .. "--plugin \"Micro Wakatime\" --cursorpos" .. X .. " --lineno "..Y ) )
     end
     return false
 end
