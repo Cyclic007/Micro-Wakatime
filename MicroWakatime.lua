@@ -15,6 +15,7 @@ local runtime = import("runtime")
 local lastFile = ""
 local lastHeartbeat = 0
 
+
 function init(bp)
     local config = shell.RunCommand("wakatime --config-read api_key")
     --micro.TermMessage(config)
@@ -25,207 +26,209 @@ function init(bp)
 
 end
 
-function sendHeartbeat(file,isWrite)
+function sendHeartbeat(file,isWrite,X,Y)
     micro.Log("sent saved heartbeat")
     if isWrite == true then
-        micro.Log(shell.RunCommand("wakatime --entity " .. file .. " --write --plugin \"Micro Wakatime\"" ) )
+        micro.Log(shell.RunCommand("wakatime --entity " .. file .. " --write --plugin \"Micro Wakatime\"--cursorpos" .. X .. " --lineno "..Y  ) )
     else
-        micro.Log(shell.RunCommand("wakatime --entity " .. file .. "--plugin \"Micro Wakatime\"" ) )
+        micro.Log(shell.RunCommand("wakatime --entity " .. file .. "--plugin \"Micro Wakatime\" --cursorpos" .. X .. " --lineno "..Y ) )
     end
     return false
 end
 
-function onEvent(file, isWrite)
+function onEvent(file, isWrite, bp)
     local time = os.time()
     if isWrite or enoughTimePassed(time) or lastFile ~= file then
-        sendHeartbeat(file, isWrite)
+        sendHeartbeat(file, isWrite,bp.Cursor.Loc.X,bp.Cursor.Loc.Y)
         lastFile = file
         lastHeartbeat = time
     end
 end
 
 function onSave(bp)
-    onEvent(bp.buf.AbsPath, true)
+    onEvent(bp.buf.AbsPath, true, bp)
 
     return true
 end
 
 function onSaveAll(bp)
-    onEvent(bp.buf.AbsPath, true)
+    onEvent(bp.buf.AbsPath, true,bp)
 
     return true
 end
 
 function onSaveAs(bp)
-    onEvent(bp.buf.AbsPath, true)
+    onEvent(bp.buf.AbsPath, true,bp)
 
     return true
 end
 
 function onOpenFile(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onPaste(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectAll(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onDeleteLine(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorUp(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
-
 function onCursorDown(bp)
-    onEvent(bp.buf.AbsPath, false)
+
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorPageUp(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorPageDown(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorLeft(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorRight(bp)
-    onEvent(bp.buf.AbsPath, false)
-
+	--micro.TermMessage(bp.Cursor.Loc.X)
+	
+    onEvent(bp.buf.AbsPath, false,bp)
+	
     return true
 end
 
 function onCursorStart(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onCursorEnd(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectToStart(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectToEnd(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectUp(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectDown(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectLeft(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectRight(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectToStartOfText(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectToStartOfTextToggle(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onWordRight(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onWordLeft(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectWordRight(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onSelectWordLeft(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onMoveLinesUp(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onMoveLinesDown(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onScrollUp(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
 
 function onScrollDown(bp)
-    onEvent(bp.buf.AbsPath, false)
+    onEvent(bp.buf.AbsPath, false,bp)
 
     return true
 end
