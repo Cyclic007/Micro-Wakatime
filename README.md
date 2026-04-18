@@ -17,3 +17,6 @@ to install use
 `git clone https://github.com/Cyclic007/Micro-Wakatime`
 
 inside of ~/.config/micro/plug/
+
+
+For it to show up on the wakatime dashbord you must save the file
